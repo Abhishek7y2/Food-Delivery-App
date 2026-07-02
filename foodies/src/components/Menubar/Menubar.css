@@ -1,0 +1,19 @@
+.logo {
+    margin-right: 25px;
+    
+}
+.menubar-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+
+.navbar .nav-link.active {
+    color: tomato !important;
+}
+
+.dropdown-menu li {
+    cursor: pointer;
+   
+}

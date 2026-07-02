@@ -1,0 +1,288 @@
+/* /* .header {
+  padding: 5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 0.25rem;
+  color: white;
+  background-image: url("../../assets/header.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+} */
+
+
+
+
+
+
+/* 
+.header {
+  padding: 5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
+  margin-top: 0.25rem;
+  color: white;
+
+  position: relative;
+  overflow: hidden;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("../../assets/header08.mp4");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transition: background-position 0.3s ease-out;
+}
+
+/* Text animation 
+.content h1 {
+  animation: slideRight 1s ease;
+}
+
+.content p {
+  animation: slideRight 1.5s ease;
+}
+
+.content .btn {
+  animation: slideRight 2s ease;
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+} */ 
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.header {
+    position: relative;
+    overflow: hidden;
+    min-height: 550px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+/* Background Video 
+
+.header-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* Dark Overlay 
+
+.overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    z-index: -1;
+}
+
+/* Content 
+
+.content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animation 
+
+.content h1 {
+    animation: slideRight 1s ease;
+}
+
+.content p {
+    animation: slideRight 1.5s ease;
+}
+
+.content .btn {
+    animation: slideRight 2s ease;
+}
+
+@keyframes slideRight {
+
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header {
+  position: relative;
+  overflow: hidden;
+
+  height: 400px;
+  width: 100%;
+
+  padding: 5rem 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+
+  border-radius: 1rem;
+  color: white;
+
+  display: flex;
+  align-items: center;
+}
+
+/* Background Video */
+.header-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Dark Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.45)
+  );
+
+  z-index: -1;
+}
+
+/* Content */
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading */
+.content h1 {
+  animation: slideRight 1s ease;
+}
+
+/* Paragraph */
+.content p {
+  animation: slideRight 1.5s ease;
+}
+
+/* Button */
+.content .btn {
+  animation: slideRight 1s ease;
+}
+
+/* Mouse Hover Effect */
+.header:hover .header-video {
+  transform: scale(1.05);
+  transition: transform 0.8s ease;
+}
+
+.header-video {
+  transition: transform 0.8s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    height: 350px;
+    padding: 3rem 1rem;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .content .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    height: 300px;
+  }
+
+  .content h1 {
+    font-size: 1.6rem;
+  }
+
+  .content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Animation */
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

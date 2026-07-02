@@ -1,0 +1,24 @@
+# Node
+node_modules/
+
+# Environment
+.env
+*.env
+
+# Build
+dist/
+build/
+target/
+
+# IDE
+.vscode/
+.idea/
+
+# ZIP files
+*.zip
+
+# Windows
+*.lnk
+
+# Logs
+*.log
