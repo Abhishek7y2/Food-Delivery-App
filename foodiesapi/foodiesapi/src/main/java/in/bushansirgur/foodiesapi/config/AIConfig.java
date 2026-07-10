@@ -55,7 +55,7 @@ public class AIConfig {
                 // Time to wait for Ollama to actually generate and return
                 // a response. LLM generation can be slow on CPU, so this
                 // is generous — tune down if you want faster failure.
-                .readTimeout(Duration.ofSeconds(60))
+                .readTimeout(Duration.ofSeconds(300))
                 .build();
     }
 }

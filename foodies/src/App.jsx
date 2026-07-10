@@ -35,7 +35,7 @@ const AppContent = () => {
         {/* <Route path='/myorders' element={token ? <MyOrders /> : <Login />} /> */}
         <Route path='/login' element={token ? <Home /> : <Login />} />
         <Route path='/register' element={token ? <Home /> : <Register />} />
-        <Route path='/myorders' element={token ? <Home /> : <MyOrders />} />
+        <Route path='/myorders' element={token ? <MyOrders /> : <Login />} />
       </Routes>
       <ChatBot />
     </div>

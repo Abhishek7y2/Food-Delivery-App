@@ -30,6 +30,7 @@ const FoodDisplay = ({category, searchText}) => {
             id={food.id}
             imageUrl={food.imageUrl}
             price={food.price}
+            category={food.category}
             />
           ))
         ) : (

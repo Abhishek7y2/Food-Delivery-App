@@ -1,158 +1,125 @@
 import React, { useContext } from 'react';
 import './Cart.css';
 import { StoreContext } from '../../context/StoreContext';
-import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import { calculateCartTotals } from '../../util/cartUtils';
 
 const Cart = () => {
   const navigate = useNavigate();
-  const {foodList, increaseQty, decreaseQty, quantities , removeFromCart} = useContext(StoreContext);
-  //cart Items
+  const { foodList, increaseQty, decreaseQty, quantities, removeFromCart } = useContext(StoreContext);
+  
+  // Cart Items
   const cartItems = foodList.filter(food => quantities[food.id] > 0);
 
-  //Calculations
-   const { subtotal, shipping, tax, total } = calculateCartTotals(cartItems, quantities);
+  // Calculations
+  const { subtotal, shipping, tax, total } = calculateCartTotals(cartItems, quantities);
   
   return (
-    <div className="container my-5">
+    <div className="cart-page-wrapper">
+      <div className="container">
+        
+        <h2 className="cart-header">Your Cart</h2>
 
-      <h2 className="mb-4">Your Shopping Cart</h2>
-
-      <div className="row">
-
-        {/* Cart Items */}
-        <div className="col-lg-8">
-
-
-          {
-          cartItems.length === 0 ? (
-            <p>Your Cart is Empty</p>
-          ) : (
-            cartItems.map((food) => (
-              <div className="card mb-3" key={food.id}>
-                <div className="card-body">
-                  <div className="row align-items-center">
-
-                    <div className="col-md-3">
-                      <img
-                        src={food.imageUrl}
-                        alt={food.name}
-                        className="img-fluid rounded"
-                        width={100}
-                      />
+        <div className="row">
+          
+          {/* Cart Items List */}
+          <div className="col-lg-8">
+            {cartItems.length === 0 ? (
+              <div className="empty-cart-container">
+                <i className="bi bi-cart-x empty-cart-icon"></i>
+                <h3 className="empty-cart-text">Your Cart is Empty</h3>
+                <p className="empty-cart-subtext">Looks like you haven't added anything delicious yet.</p>
+                <Link to="/explore" className="btn-continue-shopping">
+                  <i className="bi bi-search"></i> Explore Menu
+                </Link>
+              </div>
+            ) : (
+              <>
+                {cartItems.map((food) => (
+                  <div className="cart-item-card" key={food.id}>
+                    
+                    <div className="cart-item-img-wrapper">
+                      <img src={food.imageUrl} alt={food.name} className="cart-item-img" />
                     </div>
 
-                    <div className="col-md-5">
-                      <h5 className="card-title">{food.name}</h5>
-                      <p className="text-muted">{food.description}</p>
-                    </div>
-
-                    <div className="col-md-2">
-                      <div className="input-group">
-
-                        <button
-                          className="btn btn-outline-secondary btn-sm"
-                          type="button"
-                          onClick={() => decreaseQty(food.id)}
-                        >
-                          -
+                    <div className="cart-item-details">
+                      <h5 className="cart-item-title">{food.name}</h5>
+                      <p className="cart-item-desc">{food.description}</p>
+                      
+                      <div className="premium-qty-pill">
+                        <button className="qty-btn" onClick={() => decreaseQty(food.id)}>
+                          <i className="bi bi-dash"></i>
                         </button>
-
                         <input
-                          style={{ maxWidth: "100px" }}
                           type="text"
-                          className="form-control form-control-sm text-center quantity-input"
+                          className="qty-input"
                           value={quantities[food.id]}
                           readOnly
                         />
-
-                        <button
-                          className="btn btn-outline-secondary btn-sm"
-                          type="button"
-                          onClick={() => increaseQty(food.id)}
-                        >
-                          +
+                        <button className="qty-btn" onClick={() => increaseQty(food.id)}>
+                          <i className="bi bi-plus"></i>
                         </button>
-
                       </div>
                     </div>
 
-                    <div className="col-md-2 text-end">
-                      <p className="fw-bold">&#8377;{food.price * quantities[food.id]}</p>
-                        
-                      
-
-                      <button
-                        className="btn btn-sm btn-outline-danger"
-                        onClick={() => removeFromCart(food.id)}
-                      >
-                        <i className="bi bi-trash"></i>
+                    <div className="cart-item-actions">
+                      <p className="cart-item-price">&#8377;{(food.price * quantities[food.id]).toFixed(2)}</p>
+                      <button className="btn-remove-item" onClick={() => removeFromCart(food.id)}>
+                        <i className="bi bi-trash3-fill"></i>
                       </button>
                     </div>
-                    
-                  </div>
-                  <hr />
-                </div>
-              </div>
-            ))
-          )
-          }
 
-          
-          <div className="text-start mb-4">
-            <Link to="/" className="btn btn-outline-primary">
-              <i className="bi bi-arrow-left me-2"></i>
-              Continue Shopping
-            </Link>
+                  </div>
+                ))}
+                
+                <div className="text-start mt-4 mb-5">
+                  <Link to="/explore" className="btn-continue-shopping">
+                    <i className="bi bi-arrow-left"></i> Add More Items
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
 
-        </div>
+          {/* Cart Summary */}
+          <div className="col-lg-4">
+            <div className="order-summary-card">
+              <h5 className="summary-title">Order Summary</h5>
 
-        {/* Cart Summary */}
-        <div className="col-lg-4">
-
-          <div className="card cart-summary">
-            <div className="card-body">
-
-              <h5 className="card-title mb-4">Order Summary</h5>
-
-              <div className="d-flex justify-content-between mb-3">
+              <div className="summary-row">
                 <span>Subtotal</span>
                 <span>&#8377;{subtotal.toFixed(2)}</span>
               </div>
 
-              <div className="d-flex justify-content-between mb-3">
+              <div className="summary-row">
                 <span>Shipping</span>
-                <span>&#8377;{subtotal === 0 ? 0.0 : shipping.toFixed(2)}</span>
+                <span>&#8377;{subtotal === 0 ? "0.00" : shipping.toFixed(2)}</span>
               </div>
 
-              <div className="d-flex justify-content-between mb-3">
+              <div className="summary-row">
                 <span>Tax</span>
                 <span>&#8377;{tax.toFixed(2)}</span>
               </div>
 
-              <hr />
-
-              <div className="d-flex justify-content-between mb-4">
-                <strong>Total</strong>
-                <strong>&#8377;{subtotal === 0 ? 0.0 : total.toFixed(2)}</strong>
+              <div className="summary-row total">
+                <span>Total</span>
+                <span>&#8377;{subtotal === 0 ? "0.00" : total.toFixed(2)}</span>
               </div>
 
-              <button className="btn btn-primary w-100" disabled={cartItems.length === 0} 
-              onClick={() => navigate('/Order')}>
+              <button 
+                className="btn-checkout" 
+                disabled={cartItems.length === 0} 
+                onClick={() => navigate('/Order')}
+              >
                 Proceed to Checkout
               </button>
-
             </div>
           </div>
 
-
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
 export default Cart;

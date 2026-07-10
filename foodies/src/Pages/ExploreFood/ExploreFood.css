@@ -1,0 +1,138 @@
+/* Explore Food Page Container */
+.explore-page-wrapper {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* Explore Hero Section */
+.explore-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.explore-hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.explore-hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Search and Filter Container */
+.explore-controls-container {
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Premium Search Bar */
+.premium-search-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.premium-search-input {
+  width: 100%;
+  padding: 18px 24px 18px 55px;
+  border-radius: 50px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  font-size: 1.1rem;
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.premium-search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
+}
+
+.premium-search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.premium-search-input:focus + .premium-search-icon {
+  color: var(--primary-color);
+}
+
+/* Premium Category Pills */
+.premium-category-filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.premium-category-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pill {
+  white-space: nowrap;
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-sm);
+}
+
+.category-pill:hover {
+  background: var(--bg-main);
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+.category-pill.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* Results Header */
+.explore-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 1rem;
+}
+
+.explore-results-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.explore-results-count {
+  font-weight: 600;
+  color: var(--primary-color);
+  background: rgba(255, 107, 53, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}

@@ -8,8 +8,8 @@ package in.bushansirgur.foodiesapi.service;
 import in.bushansirgur.foodiesapi.entity.FoodEntity;
 import in.bushansirgur.foodiesapi.io.AIRequest;
 import in.bushansirgur.foodiesapi.io.AIResponse;
-import in.bushansirgur.foodiesapi.io.OllamaRequest;
-import in.bushansirgur.foodiesapi.io.OllamaResponse;
+import in.bushansirgur.foodiesapi.io.GeminiRequest;
+import in.bushansirgur.foodiesapi.io.GeminiResponse;
 import in.bushansirgur.foodiesapi.repository.FoodRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,11 +29,11 @@ public class AIServiceImpl implements AIService {
     private final FoodRepository foodRepository;
     private final RestTemplate restTemplate;
 
-    @Value("${ollama.api.url}")
-    private String ollamaApiUrl;
+    @Value("${gemini.api.url}")
+    private String geminiApiUrl;
 
-    @Value("${ollama.model}")
-    private String ollamaModel;
+    @Value("${gemini.api.key}")
+    private String geminiApiKey;
 
     public AIServiceImpl(
             FoodRepository foodRepository,
@@ -71,12 +71,17 @@ public class AIServiceImpl implements AIService {
             filteredFoods = allFoods;
         }
 
+        // Limit to at most 10 items to prevent the prompt from being too large.
+        List<FoodEntity> promptFoods = filteredFoods.stream()
+                .limit(10)
+                .collect(Collectors.toList());
+
         String prompt = buildPrompt(
                 request.getMessage(),
-                filteredFoods
+                promptFoods
         );
 
-        String aiReply = callOllama(prompt);
+        String aiReply = callGemini(prompt);
 
         List<String> recommendations =
                 filteredFoods.stream()
@@ -294,88 +299,71 @@ AVAILABLE MENU
     }
 
     // ==========================================================
-    // Call Ollama API
-    // ==========================================================
-    //
-    // Improvements made here vs. the original:
-    //
-    // 1. No more leaking raw Java/network exception text (e.g.
-    //    "I/O error on POST request... Connection refused") into
-    //    the chat bubble the end user sees. Users now get a clean,
-    //    branded fallback message, while YOU still get the full
-    //    stack trace in the server logs via log.error(...).
-    //
-    // 2. Exceptions are split into specific cases so the log line
-    //    (and, in dev, the message) tells you exactly what kind of
-    //    failure happened:
-    //      - ResourceAccessException  -> Ollama isn't reachable at all
-    //        (not running / wrong port / firewall) OR the request
-    //        timed out.
-    //      - RestClientResponseException -> Ollama responded, but with
-    //        a non-2xx status (e.g. model not pulled -> 404, bad
-    //        request -> 400).
-    //      - Generic Exception -> anything else (e.g. bad JSON mapping).
-    //
-    // 3. Timeouts are enforced (configured on the RestTemplate bean,
-    //    see AIConfig.java below) so a hung/overloaded Ollama process
-    //    can't block a request thread forever.
+    // Call Gemini API
     // ==========================================================
 
-    private String callOllama(String prompt) {
+    private String callGemini(String prompt) {
 
         try {
 
-            OllamaRequest request = OllamaRequest.builder()
-                    .model(ollamaModel)
-                    .prompt(prompt)
-                    .stream(false)
+            GeminiRequest request = GeminiRequest.builder()
+                    .contents(List.of(
+                            GeminiRequest.Content.builder()
+                                    .parts(List.of(
+                                            GeminiRequest.Part.builder()
+                                                    .text(prompt)
+                                                    .build()
+                                    ))
+                                    .build()
+                    ))
                     .build();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
-            HttpEntity<OllamaRequest> entity =
+            HttpEntity<GeminiRequest> entity =
                     new HttpEntity<>(request, headers);
 
-            ResponseEntity<OllamaResponse> response =
+            String fullUrl = geminiApiUrl + geminiApiKey;
+
+            ResponseEntity<GeminiResponse> response =
                     restTemplate.exchange(
-                            ollamaApiUrl,
+                            fullUrl,
                             HttpMethod.POST,
                             entity,
-                            OllamaResponse.class
+                            GeminiResponse.class
                     );
 
             if (response.getStatusCode() == HttpStatus.OK
                     && response.getBody() != null
-                    && response.getBody().getResponse() != null) {
+                    && response.getBody().getCandidates() != null
+                    && !response.getBody().getCandidates().isEmpty()) {
 
                 return response.getBody()
-                        .getResponse()
+                        .getCandidates()
+                        .get(0)
+                        .getContent()
+                        .getParts()
+                        .get(0)
+                        .getText()
                         .trim();
 
             }
 
-            log.warn("Ollama returned an unexpected empty/non-OK response: {}", response.getStatusCode());
+            log.warn("Gemini returned an unexpected empty/non-OK response: {}", response.getStatusCode());
             return "Sorry, I couldn't generate a response right now. 🍽️";
 
         } catch (ResourceAccessException ex) {
-            // Connection refused, host unreachable, or read/connect timeout.
-            // Most common cause during development: Ollama isn't running,
-            // or ollama.api.url in application.properties is wrong.
-            log.error("Could not reach Ollama at {}. Is it running (`ollama serve`) and is the model pulled? Details: {}",
-                    ollamaApiUrl, ex.getMessage(), ex);
+            log.error("Could not reach Gemini. Details: {}", ex.getMessage(), ex);
             return "⚠️ Foodies AI is currently unavailable. Please try again in a moment! 🙏";
 
         } catch (RestClientResponseException ex) {
-            // Ollama process is up and reachable, but returned an error
-            // status (e.g. model not found -> pull it with `ollama pull <model>`).
-            log.error("Ollama responded with status {} - body: {}",
+            log.error("Gemini responded with status {} - body: {}",
                     ex.getRawStatusCode(), ex.getResponseBodyAsString(), ex);
             return "⚠️ Foodies AI hit a snag processing that. Please try again! 🙏";
 
         } catch (Exception ex) {
-            // Catch-all for anything unforeseen (bad JSON deserialization, etc.)
-            log.error("Unexpected error while calling Ollama", ex);
+            log.error("Unexpected error while calling Gemini", ex);
             return "⚠️ Foodies AI is currently unavailable. Please try again later.";
         }
 

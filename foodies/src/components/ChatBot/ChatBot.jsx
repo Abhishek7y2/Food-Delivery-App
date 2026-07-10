@@ -42,11 +42,12 @@ const ChatBot = () => {
             setMessages((prev) => [...prev, { role: "bot", text: botText }]);
         } catch (error) {
             console.error("Foodie Bot Error:", error);
+            const errorMsg = error.response?.data?.message || error.message || "Unknown error";
             setMessages((prev) => [
                 ...prev,
                 {
                     role: "bot",
-                    text: "⚠️ Sorry, I'm unable to connect to the server right now. Please make sure the backend is running on port 8080!",
+                    text: `⚠️ Oops! I ran into an issue: ${errorMsg}\n\nPlease ensure the backend (port 8080) is running.`,
                 },
             ]);
         } finally {
@@ -102,7 +103,7 @@ const ChatBot = () => {
                             <div>
                                 <p className="chatbot-header__name">Foodie Bot 🍴</p>
                                 <p className="chatbot-header__status">
-                                    ● Powered by Llama 3.2
+                                    ● Powered by Gemini
                                 </p>
                             </div>
                         </div>

@@ -52,148 +52,154 @@ const Contact = () => {
         message: "",
       });
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to send message.");
+      console.error("EmailJS Error:", error);
+      const errorText = error?.text || error?.message || "Unknown error";
+      toast.error(`Failed to send message: ${errorText}`);
     }
 
     setLoading(false);
   };
 
   return (
-    <section className="py-5">
+    <section className="contact-page-wrapper">
       <div className="container">
+        
+        <div className="contact-hero fade-in-up">
+          <h1 className="contact-hero-title">Get In <span className="text-gradient">Touch</span></h1>
+          <p className="contact-hero-subtitle">
+            Have a question, feedback, or need help with your order? We'd love to hear from you. Reach out to our team below.
+          </p>
+        </div>
 
-        <div className="row justify-content-center">
+        <div className="row g-5">
+          {/* Contact Information Side */}
+          <div className="col-lg-5">
+            <div className="contact-info-card fade-in-up" style={{animationDelay: '0.1s'}}>
+              
+              <div className="info-item">
+                <div className="info-icon">
+                  <i className="bi bi-geo-alt-fill"></i>
+                </div>
+                <div className="info-content">
+                  <h4>Head Office</h4>
+                  <p>123 Foodie Lane, Flavor Town<br />Mumbai, MH 400001, India</p>
+                </div>
+              </div>
 
-          <div className="col-lg-8">
+              <div className="info-item">
+                <div className="info-icon">
+                  <i className="bi bi-telephone-fill"></i>
+                </div>
+                <div className="info-content">
+                  <h4>Phone Support</h4>
+                  <p>+91 9415129167<br />Mon-Fri, 9am - 8pm</p>
+                </div>
+              </div>
 
-            <div className="contact-form p-5 shadow bg-white rounded">
+              <div className="info-item">
+                <div className="info-icon">
+                  <i className="bi bi-envelope-fill"></i>
+                </div>
+                <div className="info-content">
+                  <h4>Email Us</h4>
+                  <p>support@foodiesapp.com<br />contact@foodiesapp.com</p>
+                </div>
+              </div>
 
-              <h2 className="text-center mb-4">
-                Get in Touch
-              </h2>
+              <div className="social-links">
+                <a href="#" className="social-link"><i className="bi bi-facebook"></i></a>
+                <a href="#" className="social-link"><i className="bi bi-twitter-x"></i></a>
+                <a href="https://www.instagram.com/abhishek_yadav7y" target="_blank" rel="noopener noreferrer" className="social-link"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/abhishek-yadav8/" target="_blank" rel="noopener noreferrer" className="social-link"><i className="bi bi-linkedin"></i></a>
+              </div>
 
+            </div>
+          </div>
+
+          {/* Contact Form Side */}
+          <div className="col-lg-7">
+            <div className="contact-form-card fade-in-up" style={{animationDelay: '0.2s'}}>
               <form onSubmit={sendEmail}>
-
-                <div className="row g-3">
+                <div className="row g-4">
+                  
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label className="form-label">First Name</label>
+                      <input
+                        type="text"
+                        name="first_name"
+                        className="premium-input"
+                        placeholder="John"
+                        value={formData.first_name}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
 
                   <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="first_name"
-                      className="form-control custom-input"
-                      placeholder="First Name"
-                      value={formData.first_name}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      name="last_name"
-                      className="form-control custom-input"
-                      placeholder="Last Name"
-                      value={formData.last_name}
-                      onChange={handleChange}
-                    />
+                    <div className="form-group">
+                      <label className="form-label">Last Name</label>
+                      <input
+                        type="text"
+                        name="last_name"
+                        className="premium-input"
+                        placeholder="Doe"
+                        value={formData.last_name}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
 
                   <div className="col-12">
-                    <input
-                      type="email"
-                      name="user_email"
-                      className="form-control custom-input"
-                      placeholder="Email Address"
-                      value={formData.user_email}
-                      onChange={handleChange}
-                    />
+                    <div className="form-group">
+                      <label className="form-label">Email Address</label>
+                      <input
+                        type="email"
+                        name="user_email"
+                        className="premium-input"
+                        placeholder="john@example.com"
+                        value={formData.user_email}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
 
                   <div className="col-12">
-                    <textarea
-                      rows="5"
-                      name="message"
-                      className="form-control custom-input"
-                      placeholder="Your Message"
-                      value={formData.message}
-                      onChange={handleChange}
-                    ></textarea>
+                    <div className="form-group">
+                      <label className="form-label">Your Message</label>
+                      <textarea
+                        name="message"
+                        className="premium-input"
+                        placeholder="How can we help you?"
+                        value={formData.message}
+                        onChange={handleChange}
+                      ></textarea>
+                    </div>
                   </div>
 
-                  <div className="col-12">
-
+                  <div className="col-12 pt-2">
                     <button
                       type="submit"
-                      className="btn btn-primary w-100 py-3"
+                      className="btn-submit"
                       disabled={loading}
                     >
-                      {loading ? "Sending..." : "Send Message"}
+                      {loading ? (
+                        <><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...</>
+                      ) : (
+                        <>Send Message <i className="bi bi-send"></i></>
+                      )}
                     </button>
-
                   </div>
 
                 </div>
-
               </form>
-
             </div>
-
           </div>
 
         </div>
-
       </div>
     </section>
   );
 };
 
 export default Contact;
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import './Contact.css'; 
-// import emailjs from "@emailjs/browser";
-
-// const Contact = () => {
-//   return (
-//   <section className="py-5">
-//     <div className="container">
-//         <div className="row justify-content-center">
-//             <div className="col-lg-8">
-//                 <div className="contact-form p-5 shadow-sm bg-white">
-//                     <h2 className="text-center mb-4">Get in Touch</h2>
-//                     <form>
-//                         <div className="row g-3">
-//                             <div className="col-md-6">
-//                                 <input type="text" className="form-control custom-input" placeholder="First Name"/>
-//                             </div>
-//                             <div className="col-md-6">
-//                                 <input type="text" className="form-control custom-input" placeholder="Last Name"/>
-//                             </div>
-//                             <div className="col-12">
-//                                 <input type="email" className="form-control custom-input" placeholder="Email Address"/>
-//                             </div>
-//                             <div className="col-12">
-//                                 <textarea className="form-control custom-input" rows="5" placeholder="Your Message"></textarea>
-//                             </div>
-//                             <div className="col-12">
-//                                 <button className="btn btn-primary w-100 py-3" type="submit">Send Message</button>
-//                             </div>
-//                         </div>
-//                     </form>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-// </section>
-//   )
-// }
-
-// export default Contact;

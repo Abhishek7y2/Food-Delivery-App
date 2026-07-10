@@ -1,84 +1,94 @@
 import React, { useState, useEffect, useContext } from "react";
-// import { useParams } from "react-router-dom";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { fetchFoodDetails } from "../../service/foodService";
 import { toast } from "react-toastify";
 import { StoreContext } from "../../context/StoreContext";
+import './FoodDetails.css';
 
 export const FoodDetails = () => {
   const { id } = useParams();
-  const {increaseQty} =  useContext(StoreContext);
+  const { increaseQty } = useContext(StoreContext);
   const navigate = useNavigate();
 
   const [data, setData] = useState(null);
-  const [qty, setQty] = useState(1);
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadFoodDetails = async () => {
       try {
+        setLoading(true);
         const foodData = await fetchFoodDetails(id);
         setData(foodData);
       } catch (error) {
         toast.error('Error displaying the food details.');
+      } finally {
+        setLoading(false);
       }
     }
 
     loadFoodDetails();
   }, [id]);
 
-  
-
   const addToCart = () => {
-    increaseQty(data.id);
+    if(data) {
+      increaseQty(data.id);
       navigate('/cart');
-
+    }
   };
 
+  if (loading || !data) {
+    return (
+      <div className="food-details-wrapper d-flex align-items-center justify-content-center">
+        <div className="food-details-loading">
+          <div className="spinner-border" role="status"></div>
+          <span>Loading delicious details...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <section className="py-5">
-      <div className="container px-4 px-lg-5 my-5">
-        <div className="row gx-4 gx-lg-5 align-items-center">
+    <section className="food-details-wrapper">
+      <div className="container">
+        <div className="food-details-card">
           
-          <div className="col-md-6">
+          <div className="food-details-image-section">
             <img
-              className="card-img-top mb-5 mb-md-0"
-              src={data?.imageUrl}
-              alt="..."
+              className="food-details-image"
+              src={data.imageUrl}
+              alt={data.name}
             />
           </div>
 
-          <div className="col-md-6">
-            <div className="fs-5 mb-2">
-              Category:
-              <span className="badge text-bg-warning">
-                {data?.category}
-              </span>
-            </div>
+          <div className="food-details-info-section">
+            <Link to="/explore" className="btn-back-explore">
+              <i className="bi bi-arrow-left"></i> Back to Menu
+            </Link>
 
-            <h1 className="display-5 fw-bolder">
-              {data?.name}
+            <span className="food-category-badge">
+              {data.category}
+            </span>
+
+            <h1 className="food-title">
+              {data.name}
             </h1>
 
-            <div className="fs-5 mb-5">
-              <span className="text-decoration-line-through"></span>
-              <span>&#8377;{data?.price}.00</span>
+            <div className="food-price">
+              <span>&#8377;{data.price.toFixed(2)}</span>
             </div>
 
-            <p className="lead">
-              {data?.description}
+            <p className="food-description">
+              {data.description || "A delicious meal prepared with the finest ingredients."}
             </p>
 
-            <div className="d-flex">
-              
-
+            <div className="food-action-container">
               <button
-                className="btn btn-outline-dark flex-shrink-0"
-                type="button" onClick={addToCart}
+                className="btn-add-to-cart-large"
+                type="button" 
+                onClick={addToCart}
               >
-                <i className="bi-cart-fill me-1"></i>
-                Add to cart
+                <i className="bi bi-cart-plus"></i>
+                Add to Cart
               </button>
             </div>
 
