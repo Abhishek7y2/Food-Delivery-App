@@ -38,3 +38,13 @@ export const deleteFood = async (foodId) => {
     throw error;
   }
 }
+
+export const updateFood = async (foodId, foodData) => {
+  try {
+    const response = await axios.put(API_URL + "/" + foodId, foodData);
+    return response.data;
+  } catch (error) {
+    console.log('Error while updating food:', error);
+    throw error;
+  }
+}

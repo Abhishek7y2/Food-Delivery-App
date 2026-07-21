@@ -36,9 +36,8 @@ public class AppUserDetailsService implements UserDetailsService {
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
-                .disabled(false)
+                .disabled(!user.isVerified()) // Blocks login if not verified
                 .build();
-
     }
 
 

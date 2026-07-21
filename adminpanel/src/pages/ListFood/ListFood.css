@@ -1,3 +1,143 @@
-.table td {
+.list-food-container {
+    padding: 2rem;
+    animation: fadeIn 0.4s ease-out;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.modern-list-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.modern-list-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+.modern-table-container {
+    overflow-x: auto;
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+}
+
+.modern-table th {
+    background-color: transparent;
+    color: #ff6347;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 0 1rem 0.5rem 1rem;
+    border: none;
+    text-align: left;
+}
+
+.modern-table tbody tr {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+}
+
+.modern-table tbody tr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.modern-table td {
+    padding: 1.2rem 1rem;
     vertical-align: middle;
+    border: none;
+    color: #444;
+    font-weight: 500;
+}
+
+/* Add rounded corners to the first and last cells of each row for the floating effect */
+.modern-table tbody td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+.modern-table tbody td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.food-list-img {
+    height: 56px;
+    width: 56px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.category-badge {
+    background-color: #f1f3f5;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #555;
+    font-weight: 600;
+}
+
+.price-text {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #fee2e2;
+    color: #ef4444;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #ef4444;
+    color: white;
+    transform: scale(1.1);
+}
+
+.edit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e0f2fe;
+    color: #0284c7;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+}
+
+.edit-btn:hover {
+    background-color: #0284c7;
+    color: white;
+    transform: scale(1.1);
+}
+
+.edit-row td {
+    background-color: #f8fafc;
 }

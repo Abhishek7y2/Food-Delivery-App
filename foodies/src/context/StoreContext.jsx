@@ -15,7 +15,7 @@ export const StoreContextProvider = (props) => {
             ...prev,
             [foodId]: (prev[foodId] || 0) + 1
         }));
-        if (token) await addToCart(foodId, token);
+        if (token) await addToCart(foodId);
     };
 
     const decreaseQty = async (foodId) => {
@@ -23,7 +23,7 @@ export const StoreContextProvider = (props) => {
             ...prev,
             [foodId]: prev[foodId] > 0 ? prev[foodId] - 1 : 0
         }));
-        if (token) await removeQtyFromCart(foodId, token);
+        if (token) await removeQtyFromCart(foodId);
     };
 
     const removeFromCart = (foodId) => {
@@ -34,9 +34,8 @@ export const StoreContextProvider = (props) => {
         });
     };
 
-    const loadCartData = async (token) => {
-        if (!token) return;
-        const items = await getCartData(token);
+    const loadCartData = async () => {
+        const items = await getCartData();
         setQuantities(items || {});
     };
 
@@ -52,6 +51,16 @@ export const StoreContextProvider = (props) => {
         loadCartData,
     };
 
+    // Listen for global auth errors to automatically log out
+    useEffect(() => {
+        const handleAuthError = () => {
+            setToken("");
+            setQuantities({});
+        };
+        window.addEventListener('auth-error', handleAuthError);
+        return () => window.removeEventListener('auth-error', handleAuthError);
+    }, []);
+
     useEffect(() => {
         async function loadData() {
             try {
@@ -61,7 +70,7 @@ export const StoreContextProvider = (props) => {
                 const savedToken = localStorage.getItem("token");
                 if (savedToken) {
                     setToken(savedToken);
-                    await loadCartData(savedToken);
+                    await loadCartData();
                 }
             } catch (error) {
                 console.error("StoreContext Load Error:", error);

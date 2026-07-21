@@ -1,10 +1,8 @@
-import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:8080/api';
+import apiClient from './apiClient';
 
 export const registerUser = async (data) => {
   try {
-    const response = await axios.post(API_BASE_URL + '/register', data); 
+    const response = await apiClient.post('/register', data); 
     return response;
   } catch (error) {
     throw error;
@@ -13,10 +11,27 @@ export const registerUser = async (data) => {
 
 export const login = async (data) => {  
   try {
-    const response = await axios.post(API_BASE_URL + '/login', data);    
+    const response = await apiClient.post('/login', data);    
     return response;
   } catch (error) {
     throw error;
   }
 };
 
+export const verifyOtp = async (data) => {
+  try {
+    const response = await apiClient.post('/verify-otp', data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const resendOtp = async (data) => {
+  try {
+    const response = await apiClient.post('/resend-otp', data);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

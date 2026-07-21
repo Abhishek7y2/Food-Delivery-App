@@ -22,7 +22,7 @@ const ExploreMenu = ({category, setCategory}) => {
     <div className="explore-menu position-relative">
 
         <div className="d-flex align-items-center justify-content-between">
-            <h1 className="mb-0">Explore Our Menu</h1>
+            <h1 className="mb-0 fw-bold">Explore Our Menu</h1>
             <div className="d-flex gap-2">
                 
                 <i className='bi bi-arrow-left-circle scroll-icon fs-3' onClick={scrollLeft}></i>
@@ -38,7 +38,13 @@ const ExploreMenu = ({category, setCategory}) => {
             categories.map((item, index) => {
               return (
                 <div key={index} className="text-center explore-menu-list-item" onClick={() => setCategory(prev => prev === item.category ? 'All': item.category )}  >
-                  <img src={item.icon} alt="" className={item.category === category ? 'rounded-circle active':'rounded-circle'} height={128} width={128} />
+                  <img 
+                      src={item.icon} 
+                      alt="" 
+                      className={item.category === category ? "rounded-circle active" : "rounded-circle"} 
+                      height={100} 
+                      width={100} 
+                  />
                   <p className='mt-2 fw-bold'>{item.category}</p>
                 </div>
               )

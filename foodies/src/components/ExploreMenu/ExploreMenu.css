@@ -1,6 +1,7 @@
 .explore-menu-list::-webkit-scrollbar {
     display: none;
 }
+
 .explore-menu-list {
     scrollbar-width: none;
 }
@@ -8,6 +9,7 @@
 .explore-menu-list-item img {
     cursor: pointer;
 }
+
 .explore-menu-list-item .active {
     border: 5px solid tomato;
     padding: 2px;
@@ -19,10 +21,10 @@
 }
 
 .scroll-icon {
-    fon-size: 24px;
+    font-size: 24px;
     cursor: pointer;
     margin-left: 10px;
-    color:#747474;
+    color: #747474;
     transition: color 0.02s;
 }
 
@@ -34,9 +36,14 @@
     margin: 10px 0px;
     height: 2px;
     background-color: #e2e2e2;
-    border:none;
+    border: none;
 }
+
 .explore-menu-list-item .active {
     border: 4px solid tomato;
     padding: 2px;
+}
+
+.explore-menu {
+    padding: 10px 0;
 }

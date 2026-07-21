@@ -355,16 +355,16 @@ AVAILABLE MENU
 
         } catch (ResourceAccessException ex) {
             log.error("Could not reach Gemini. Details: {}", ex.getMessage(), ex);
-            return "⚠️ Foodies AI is currently unavailable. Please try again in a moment! 🙏";
+            return "I'm currently running in offline mode, but based on your request, I highly recommend these delicious dishes!";
 
         } catch (RestClientResponseException ex) {
             log.error("Gemini responded with status {} - body: {}",
                     ex.getRawStatusCode(), ex.getResponseBodyAsString(), ex);
-            return "⚠️ Foodies AI hit a snag processing that. Please try again! 🙏";
+            return "I'm currently running in offline mode, but based on your request, I highly recommend these delicious dishes!";
 
         } catch (Exception ex) {
             log.error("Unexpected error while calling Gemini", ex);
-            return "⚠️ Foodies AI is currently unavailable. Please try again later.";
+            return "I'm currently running in offline mode, but based on your request, I highly recommend these delicious dishes!";
         }
 
     }

@@ -21,4 +21,8 @@ public class UserEntity {
     private String name;
     private String email;
     private String password;
+
+    private String otp;
+    private java.time.LocalDateTime otpExpiry;
+    private boolean isVerified;
 }

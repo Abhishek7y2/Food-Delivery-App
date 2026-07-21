@@ -42,12 +42,14 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/register",
                                 "/api/login",
+                                "/api/verify-otp",
                                 "/api/foods/**",
                                 "/api/orders/create",
                                 "/api/orders/verify",
                                 "/api/orders/all",
                                 "/api/orders/status/**",
-                                "/api/ai/**"
+                                "/api/ai/**",
+                                "/error"
                         )
                         .permitAll()
                         .anyRequest()

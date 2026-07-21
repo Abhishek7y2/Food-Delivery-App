@@ -1,0 +1,189 @@
+.orders-container {
+    padding: 0.5rem;
+    animation: fadeIn 0.4s ease-out;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.modern-orders-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.modern-orders-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+.orders-table-wrapper {
+    overflow-x: auto;
+}
+
+.modern-orders-table {
+    width: 100%;
+    min-width: 950px;
+    border-collapse: separate;
+    border-spacing: 0 16px;
+}
+
+.modern-orders-table tbody tr {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+}
+
+.modern-orders-table tbody tr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.modern-orders-table td {
+    padding: 1.5rem 1rem;
+    vertical-align: middle;
+    border: none;
+    color: #444;
+}
+
+.modern-orders-table tbody td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    text-align: center;
+}
+
+.modern-orders-table thead th {
+    padding: 0 1rem;
+    text-align: left;
+    color: #ff6347;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+}
+
+.header-badge {
+    background-color: #fff0eb;
+    color: #ff6347;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    display: inline-block;
+    border: 1px solid rgba(255, 99, 71, 0.2);
+    box-shadow: 0 2px 4px rgba(255, 99, 71, 0.05);
+}
+
+.order-serial {
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1rem;
+}
+.modern-orders-table tbody td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.order-icon {
+    opacity: 0.8;
+}
+
+.order-details-col {
+    max-width: 300px;
+}
+
+.order-items {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.order-address {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.order-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #27ae60;
+}
+
+.order-count {
+    font-size: 0.9rem;
+    color: #555;
+    background-color: #f1f3f5;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+.order-status-text {
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.order-status-col {
+    width: 140px;
+    padding-right: 0 !important;
+}
+
+.order-action-col {
+    width: 160px;
+}
+
+/* Dynamic status colors */
+.status-badge {
+    padding: 0.5rem 1.8rem 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+    min-width: 150px;
+    white-space: nowrap;
+}
+
+.status-badge:focus {
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+}
+
+.status-preparing {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+.status-out-for-delivery {
+    background-color: #cce5ff;
+    color: #004085;
+    border-color: #b8daff;
+}
+
+.status-delivered {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}

@@ -4,7 +4,7 @@
 
 #sidebar-wrapper {
   min-height: 100vh;
-  margin-left: -15rem;
+  margin-left: -12rem;
   transition: margin 0.25s ease-out;
 }
 
@@ -14,7 +14,7 @@
 }
 
 #sidebar-wrapper .list-group {
-  width: 15rem;
+  width: 12rem;
 }
 
 #page-content-wrapper {
@@ -34,6 +34,6 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     width: 100%;
   }
   body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
-    margin-left: -15rem;
+    margin-left: -12rem;
   }
 }

@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:8080/api/foods";
+import apiClient from './apiClient';
 
 export const fetchFoodList = async () => {
     try {
-        const response = await axios.get(API_URL);
+        const response = await apiClient.get('/foods');
         return response.data;
     } catch (error) {
         console.error("Error fetching food list:", error);
@@ -14,7 +12,7 @@ export const fetchFoodList = async () => {
 
 export const fetchFoodDetails = async (id) => {
     try {
-        const response = await axios.get(`${API_URL}/${id}`);
+        const response = await apiClient.get(`/foods/${id}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching food details:", error);

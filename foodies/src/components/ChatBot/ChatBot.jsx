@@ -47,7 +47,7 @@ const ChatBot = () => {
                 ...prev,
                 {
                     role: "bot",
-                    text: `⚠️ Oops! I ran into an issue: ${errorMsg}\n\nPlease ensure the backend (port 8080) is running.`,
+                    text: `⚠️ Oops! I ran into an issue: ${errorMsg}`,
                 },
             ]);
         } finally {

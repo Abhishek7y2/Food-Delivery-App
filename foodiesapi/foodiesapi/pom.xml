@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.36</version>
+			<version>1.18.34</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -126,6 +126,12 @@
 			<version>1.4.5</version>
 		</dependency>
 
+		<!-- Spring Boot Starter Mail (SMTP) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -140,7 +146,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.36</version>
+							<version>1.18.34</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
