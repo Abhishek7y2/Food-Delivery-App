@@ -13,5 +13,8 @@
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "mongodb": "^7.5.0"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^11.2.0"
   }
 }
