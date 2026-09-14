@@ -13,15 +13,15 @@ A modern, production-grade, enterprise food delivery platform built with **Sprin
 
 ## 📋 Table of Contents
 - [🌟 Key System Features](#-key-system-features)
+- [📸 Application Visual Showcase & UI Gallery](#-application-visual-showcase--ui-gallery)
 - [🛠️ Detailed Technology Stack](#️-detailed-technology-stack)
 - [🏛️ System Architecture Overview](#️-system-architecture-overview)
 - [📁 Repository Monorepo Structure](#-repository-monorepo-structure)
 - [🗄️ Database Schemas & Data Models](#️-database-schemas--data-models)
 - [🔑 Security & Authentication Architecture](#-security--authentication-architecture)
-- [🤖 AI Chatbot Architecture (Foodie Bot)](#-ai-chatbot-architecture-foodie-bot)
 - [💳 Payment Gateway Integration (Razorpay)](#-payment-gateway-integration-razorpay)
 - [⚡ Quick Start & Installation Guide](#-quick-start--installation-guide)
-- [🐳 Docker & Cloud Deployment](#-docker--cloud-deployment)
+- [🐳 Docker Deployment](#-docker-deployment)
 
 ---
 
@@ -48,6 +48,56 @@ A modern, production-grade, enterprise food delivery platform built with **Sprin
 
 ---
 
+## 📸 Application Visual Showcase & UI Gallery
+
+### 🛒 1. Customer Web Application (`frontend-customer`)
+| Home & Hero Banner | Explore Food Categories |
+| :---: | :---: |
+| ![Home Catalog](docs/screenshots/customer/01-home-hero-catalog.png) | ![Categories](docs/screenshots/customer/02-explore-menu-categories.png) |
+
+| Food Items Catalog (70 Items) | Shopping Cart Summary |
+| :---: | :---: |
+| ![Food Items](docs/screenshots/customer/03-food-items-grid.png) | ![Cart](docs/screenshots/customer/04-shopping-cart-summary.png) |
+
+| Customer Login Modal | 2FA Email OTP Verification |
+| :---: | :---: |
+| ![Login](docs/screenshots/customer/05-customer-login-modal.png) | ![OTP Verification](docs/screenshots/customer/06-otp-verification-dialog.png) |
+
+---
+
+### 🤖 2. Google Gemini AI Assistant ("Foodie Bot")
+| Smart AI Recommendations | Interactive Chat Assistant |
+| :---: | :---: |
+| ![Foodie Bot AI](docs/screenshots/customer/07-foodie-bot-ai-chat.png) | ![Recommendations](docs/screenshots/customer/08-foodie-bot-recommendations.png) |
+
+---
+
+### 💳 3. Checkout, Razorpay Payment & Order Tracking
+| Delivery Address Details | Razorpay Payment Checkout |
+| :---: | :---: |
+| ![Checkout](docs/screenshots/customer/09-checkout-delivery-details.png) | ![Razorpay Options](docs/screenshots/customer/10-payment-razorpay-options.png) |
+
+| UPI / QR Code Modal | Order Confirmation & Status |
+| :---: | :---: |
+| ![Razorpay QR](docs/screenshots/customer/11-razorpay-qr-upi-modal.png) | ![Payment Success](docs/screenshots/customer/12-payment-success-confirmation.png) |
+
+| Customer Orders Dashboard | Real-Time Order Tracking |
+| :---: | :---: |
+| ![Orders List](docs/screenshots/customer/13-customer-orders-list.png) | ![Status Tracking](docs/screenshots/customer/14-order-status-tracking.png) |
+
+---
+
+### 🛡️ 4. Admin Management Dashboard (`frontend-admin`)
+| Secure Admin 2FA Login | Add New Food Item (AWS S3 Upload) |
+| :---: | :---: |
+| ![Admin Login](docs/screenshots/admin/01-admin-login-2fa.png) | ![Add Food](docs/screenshots/admin/02-admin-add-food-item.png) |
+
+| Food Menu Management Catalog | Order Fulfillment & Status Update |
+| :---: | :---: |
+| ![Food Catalog](docs/screenshots/admin/03-admin-food-catalog-list.png) | ![Orders Management](docs/screenshots/admin/04-admin-orders-fulfillment-status.png) |
+
+---
+
 ## 🛠️ Detailed Technology Stack
 
 ### 1. Backend API Layer
@@ -66,7 +116,7 @@ A modern, production-grade, enterprise food delivery platform built with **Sprin
 | Component | Technology / Library | Description |
 | :--- | :--- | :--- |
 | **UI Framework** | React 19 | Component-driven declarative user interface |
-| **Build System** | Vite 5 | Instant HMR development server & optimized productionbundler |
+| **Build System** | Vite 5 | Instant HMR development server & optimized production bundler |
 | **Routing** | React Router DOM v6 | Client-side page navigation & route protection |
 | **HTTP Client** | Axios | Interceptor-backed HTTP client for backend REST communication |
 | **State Management** | React Context API | Global state management for authentication tokens and cart state |
@@ -153,6 +203,10 @@ Food Delivery app/
 ├── db/                         # MongoDB Database Scripts
 │   ├── seed.js                 # Dataset seeder (70 items across 7 categories)
 │   └── package.json            # Node MongoDB script runner
+├── docs/                       # Project Documentation & Screenshots
+│   └── screenshots/            # Structured High-Res UI Gallery Assets
+│       ├── customer/           # Customer Web Portal Screenshots (01 to 16)
+│       └── admin/              # Admin Control Panel Screenshots (01 to 04)
 ├── docker-compose.yml          # Production Docker Orchestration Blueprint
 ├── ARCHITECTURE.md             # Detailed Technical Architecture Specifications
 ├── DEPLOYMENT.md               # Cloud Deployment & Infrastructure Guide
